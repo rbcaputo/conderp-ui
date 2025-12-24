@@ -1,0 +1,87 @@
+<span mat-dialog-title>
+  Editar Ordem de Produção
+</span>
+<mat-dialog-content>
+
+  <form [formGroup]="putForm">
+
+    <div class="subtitle-container">
+
+      <span class="material-symbols-rounded">
+        info
+      </span>
+      <span class="subtitle">
+        Informações Gerais
+      </span>
+
+    </div>
+    <div class="form-field-container">
+
+      <mat-form-field>
+
+        <mat-label>
+          Cód. Estoque
+        </mat-label>
+        <input type="text" matInput formControlName="storageCode" />
+        @if (putForm.get("storageCode")?.hasError("pattern")) {
+        <mat-error>
+          Dado inválido
+        </mat-error>
+        }
+
+      </mat-form-field>
+      <mat-form-field class="input-subcontainer">
+
+        <mat-label>
+          Cód. Embalagem
+        </mat-label>
+        <input type="text" matInput formControlName="packagingPublicId" />
+        @if (putForm.get("packagingPublicId")?.hasError("pattern")) {
+        <mat-error>
+          Dado inválido
+        </mat-error>
+        }
+
+      </mat-form-field>
+
+    </div>
+    <mat-form-field class="input-subcontainer">
+
+      <mat-label>
+        Status
+      </mat-label>
+      <mat-select formControlName="status">
+
+        <mat-option *ngFor="let status of ORDER_STATUS_OPTS | keyvalue" [value]="status.value">
+          {{status.key}}
+        </mat-option>
+
+      </mat-select>
+      @if (putForm.get("supplierPublicId")?.hasError("required")) {
+      <mat-error>
+        Campo obrigatório
+      </mat-error>
+      }
+
+    </mat-form-field>
+
+  </form>
+
+</mat-dialog-content>
+<mat-dialog-actions>
+
+  <button mat-icon-button [matTooltip]="tooltip" [matTooltipPosition]="tooltipPosition" (click)="putForm.reset();">
+
+    <span class="material-symbols-rounded">
+      restart_alt
+    </span>
+
+  </button>
+  <button mat-button (click)="updateProductionByPublicIdAsync(production.publicId);">
+    Enviar
+  </button>
+  <button mat-button mat-dialog-close cdkFocusInitial>
+    Cancelar
+  </button>
+
+</mat-dialog-actions>

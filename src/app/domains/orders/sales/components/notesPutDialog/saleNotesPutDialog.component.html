@@ -1,0 +1,45 @@
+<span mat-dialog-title>
+  Editar Notas da Ordem de Compra
+</span>
+<mat-dialog-content>
+
+  <form [formGroup]="putForm">
+
+    <mat-form-field>
+
+      <mat-label>
+        Notas
+      </mat-label>
+      <textarea matInput maxlength="500" formControlName="notes" #notes></textarea>
+      @if (putForm.getError("notes")?.hasError("maxLength")) {
+      <mat-error>
+        Excesso de caracteres
+      </mat-error>
+      }
+      <mat-hint align="end">
+        {{notes.value.length}} / 500
+      </mat-hint>
+
+    </mat-form-field>
+
+  </form>
+
+</mat-dialog-content>
+<mat-dialog-actions>
+
+  <button mat-icon-button [matTooltip]="tooltip" [matTooltipPosition]="tooltipPosition"
+    (click)="putForm.get('notes')?.reset();">
+
+    <span class="material-symbols-rounded">
+      restart_alt
+    </span>
+
+  </button>
+  <button mat-button (click)="upsateSaleNotesByPublicIdAsync(sale.publicId);">
+    Enviar
+  </button>
+  <button mat-button mat-dialog-close cdkFocusInitial>
+    Cancelar
+  </button>
+
+</mat-dialog-actions>

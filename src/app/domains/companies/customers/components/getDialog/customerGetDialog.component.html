@@ -1,0 +1,242 @@
+<span mat-dialog-title>
+  Detalhes do Cliente
+</span>
+<mat-dialog-content>
+
+  <div class="subtitle-container">
+
+    <span class="material-symbols-rounded">
+      info
+    </span>
+    <span class="subtitle">
+      Informações Gerais
+    </span>
+
+  </div>
+  <div class="content-container">
+
+    <span>
+      Cód. Identificador
+    </span>
+    <span [matTooltip]="tooltips[0]" [matTooltipPosition]="tooltipPosition"
+      (click)="clipboardService.copyTextToClipboard(customer.publicId);" class="public-id">
+      {{customer.publicId}}
+    </span>
+
+  </div>
+  <div class="content-container">
+
+    <span>
+      Nome
+    </span>
+    <span class="value">
+      {{customer.name}}
+    </span>
+
+  </div>
+  <div class="content-container">
+
+    <span>
+      Cnpj
+    </span>
+    <span class="value">
+      {{customer.cnpj}}
+    </span>
+
+  </div>
+  <div class="content-container-mult">
+
+    <div *ngIf="customer.phone" class="content-subcontainer">
+
+      <span>
+        Telefone
+      </span>
+      <span class="value">
+        {{customer.phone}}
+      </span>
+
+    </div>
+    <div *ngIf="customer.whatsApp" class="content-subcontainer">
+
+      <span>
+        WhatsApp
+      </span>
+      <span class="value">
+        {{customer.whatsApp}}
+      </span>
+
+    </div>
+
+  </div>
+  <div *ngIf="customer.email" class="content-container">
+
+    <span>
+      Email
+    </span>
+    <span class="value">
+      {{customer.email}}
+    </span>
+
+  </div>
+  <div *ngIf="customer.website" class="content-container">
+
+    <span>
+      Website
+    </span>
+    <span>
+
+      <a [href]="customer.website" target="_blank">
+        {{customer.website}}
+      </a>
+
+    </span>
+
+  </div>
+  <div class="subtitle-container">
+
+    <span class="material-symbols-rounded">
+      home_work
+    </span>
+    <span class="subtitle">
+      Endereço
+    </span>
+
+  </div>
+  <div class="content-container-mult">
+
+    <div class="content-subcontainer">
+
+      <span>
+        Rua
+      </span>
+      <span class="value">
+        {{customer.street}}
+      </span>
+
+    </div>
+    <div class="content-subcontainer">
+
+      <span>
+        Número
+      </span>
+      <span class="value">
+        {{customer.number}}
+      </span>
+
+    </div>
+
+  </div>
+  <div class="content-container-mult">
+
+    <div *ngIf="customer.complement" class="content-subcontainer">
+
+      <span>
+        Complemento
+      </span>
+      <span class="value">
+        {{customer.complement}}
+      </span>
+
+    </div>
+    <div class="content-subcontainer">
+
+      <span>
+        Bairro
+      </span>
+      <span class="value">
+        {{customer.district}}
+      </span>
+
+    </div>
+
+  </div>
+  <div class="content-container-mult">
+
+    <div class="content-subcontainer">
+
+      <span>
+        Cidade
+      </span>
+      <span class="value">
+        {{customer.city}}
+      </span>
+
+    </div>
+    <div class="content-subcontainer">
+
+      <span>
+        Estado
+      </span>
+      <span class="value">
+        {{customer.state}}
+      </span>
+
+    </div>
+
+  </div>
+  <div class="content-container">
+
+    <span>
+      Cep
+    </span>
+    <span class="value">
+      {{customer.postalCode}}
+    </span>
+
+  </div>
+  <div class="subtitle-container">
+
+    <span class="material-symbols-rounded">
+      description
+    </span>
+    <span class="subtitle">
+      Notas
+    </span>
+    <button mat-icon-button *ngIf="allAllowed" [matTooltip]="tooltips[2]" [matTooltipPosition]="tooltipPosition"
+      (click)="dialogService.openActionDialog(dialogService.entityType.Customer, customer, 'notes');"
+      class="button-edit-notes">
+
+      <span class="material-symbols-rounded icon-edit-notes">
+        edit_square
+      </span>
+
+    </button>
+
+  </div>
+  <div *ngIf="customer.notes && allAllowed" class="content-container">
+
+    <span class="value pre-formatted-text">
+      {{customer.notes}}
+    </span>
+
+  </div>
+
+</mat-dialog-content>
+<mat-dialog-actions>
+
+  <div>
+
+    <button mat-icon-button *ngIf="allAllowed" [matTooltip]="tooltips[3]" [matTooltipPosition]="tooltipPosition"
+      (click)="dialogService.openActionDialog(dialogService.entityType.Customer, customer, 'put');" class="button-edit">
+
+      <span class="material-symbols-rounded">
+        edit_square
+      </span>
+
+    </button>
+    <button mat-icon-button *ngIf="someAllowed" [matTooltip]="tooltips[4]" [matTooltipPosition]="tooltipPosition"
+      (click)="dialogService.openActionDialog(dialogService.entityType.Customer, customer, 'delete');"
+      class="button-delete">
+
+      <span class="material-symbols-rounded">
+        delete
+      </span>
+
+    </button>
+
+  </div>
+  <button mat-button mat-dialog-close cdkFocusInitial>
+    Fechar
+  </button>
+
+</mat-dialog-actions>

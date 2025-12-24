@@ -1,0 +1,58 @@
+/* Add global styles and import other styles */
+@use "@angular/material" as mat;
+@import url("./app/common/scss/reset.scss");
+
+:root {
+  --primary-font: "Lexend", "Arial", "Helvetica", sans-serif;
+
+  --primary-black: 51, 51, 51;
+  --primary-white: 254, 254, 254;
+  --secondary-white: 245, 245, 245;
+  --grey: 167, 167, 169;
+
+  --red: 186, 26, 26;
+  --green: 0, 128, 0;
+  --blue: 0, 92, 187;
+  --yellow: 191, 167, 0;
+
+  @include mat.menu-overrides ((
+    item-label-text-font: var(--primary-font),
+    container-color: rgb(var(--secondary-white))
+  ));
+  @include mat.tooltip-overrides((supporting-text-font: var(--primary-font)));
+  @include mat.table-overrides((
+    header-container-height: 50px,
+    row-item-container-height: 50px,
+    header-headline-font: var(--primary-font),
+    row-item-label-text-font: var(--primary-font)
+  ));
+  @include mat.paginator-overrides((
+    container-text-font: var(--primary-font),
+    container-background-color: rgb(var(--secondary-white))
+    ));
+  @include mat.dialog-overrides((
+    container-min-width: 400px,
+    supporting-text-font: var(--primary-font),
+    subhead-font: var(--primary-font)
+  ));
+  @include mat.form-field-overrides((
+    container-text-font: var(--primary-font),
+    filled-container-color: rgb(var(--secondary-white)),
+    filled-label-text-font: var(--primary-font),
+    subscript-text-font: var(--primary-font)
+  ));
+  @include mat.button-overrides((
+    filled-label-text-font: var(--primary-font),
+    text-label-text-font: var(--primary-font)
+  ));
+  @include mat.snack-bar-overrides((supporting-text-font: var(--primary-font)));
+  @include mat.badge-overrides((text-font: var(--primary-font)));
+}
+
+html,
+body {
+  height: 100vh;
+  font-family: var(--primary-font);
+  background-color: rgb(var(--primary-white));
+  color: rgb(var(--primary-black));
+}

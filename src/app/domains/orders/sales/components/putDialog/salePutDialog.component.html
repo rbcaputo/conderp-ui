@@ -1,0 +1,100 @@
+<span mat-dialog-title>
+  Editar Ordem de Venda
+</span>
+<mat-dialog-content>
+
+  <form [formGroup]="putForm">
+
+    <div class="subtitle-container">
+
+      <span class="material-symbols-rounded">
+        info
+      </span>
+      <span class="subtitle">
+        Informações Gerais
+      </span>
+
+    </div>
+    <div class="form-field-container">
+
+      <mat-form-field>
+
+        <mat-label>
+          Quantidade
+        </mat-label>
+        <input type="number" matInput formControlName="amount" />
+        <span matTextSuffix>
+          &nbsp;kg
+        </span>
+        @if (putForm.get("amount")?.hasError("required")) {
+        <mat-error>
+          Campo obrigatório
+        </mat-error>
+        }
+        @if (!putForm.get("amount")?.hasError("required") &&
+        (putForm.get("amount")?.hasError("min") ||
+        putForm.get("amount")?.hasError("max"))) {
+        <mat-error>
+          Dado inválido
+        </mat-error>
+        }
+
+      </mat-form-field>
+      <mat-form-field>
+
+        <mat-label>
+          Preço
+        </mat-label>
+        <input type="number" matInput formControlName="price" step="any" />
+        <span matTextPrefix>
+          R$&nbsp;
+        </span>
+        @if (putForm.get("price")?.hasError("required")) {
+        <mat-error>
+          Campo obrigatório
+        </mat-error>
+        }
+
+      </mat-form-field>
+
+    </div>
+    <mat-form-field>
+
+      <mat-label>
+        Situação
+      </mat-label>
+      <mat-select formControlName="status">
+
+        <mat-option *ngFor="let status of ORDER_STATUS_OPTS | keyvalue" [value]="status.value">
+          {{status.key}}
+        </mat-option>
+
+      </mat-select>
+      @if (putForm.get("status")?.hasError("required")) {
+      <mat-error>
+        Campo obrigatório
+      </mat-error>
+      }
+
+    </mat-form-field>
+
+  </form>
+
+</mat-dialog-content>
+<mat-dialog-actions>
+
+  <button mat-icon-button [matTooltip]="tooltip" [matTooltipPosition]="tooltipPosition" (click)="putForm.reset();">
+
+    <span class="material-symbols-rounded">
+      restart_alt
+    </span>
+
+  </button>
+  <button mat-button (click)="updateSaleByPublicIdAsync(sale.publicId);">
+    Enviar
+  </button>
+  <button mat-button mat-dialog-close cdkFocusInitial>
+    Cancelar
+  </button>
+
+</mat-dialog-actions>

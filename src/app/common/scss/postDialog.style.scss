@@ -1,0 +1,47 @@
+span[mat-dialog-title] {
+  text-align: center;
+  padding-bottom: 15px;
+  margin-bottom: 10px;
+  background-color: rgba(var(--green), 0.2);
+}
+
+.subtitle-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-left: 20px;
+}
+
+.subtitle {
+  margin: 20px 0;
+  font-weight: 500;
+  color: rgb(var(--primary-black));
+}
+
+mat-form-field {
+  width: 100%;
+}
+
+.form-field-container {
+  display: flex;
+  gap: 25px;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  display: none;
+}
+
+mat-select,
+mat-option {
+  font-family: var(--primary-font);
+}
+
+mat-dialog-actions {
+  border-top: 1px solid rgb(var(--primary-black));
+}

@@ -1,0 +1,41 @@
+<form>
+
+  <mat-form-field>
+    <span matTextPrefix class="material-symbols-rounded">
+      search&nbsp;
+    </span>
+    <mat-label>
+      Buscar {{entityName}}
+    </mat-label>
+    <input matInput type="text" name="filterInput" [value]="filterValue" (input)="applyFilter($event)" />
+    <button mat-icon-button matSuffix *ngIf="filterValue" (click)="resetFilter();">
+
+      <span class="material-symbols-rounded">
+        close
+      </span>
+
+    </button>
+
+  </mat-form-field>
+
+</form>
+<div class="button-container" *ngIf="entityType != entityTypes.Notification">
+
+  <button mat-icon-button [matTooltipPosition]="tooltipPosition" [matTooltip]="tooltips[0]"
+    (click)="dialogService.openPostDialog();" class="button-add">
+
+    <span class="material-symbols-rounded icon-add">
+      add_box
+    </span>
+
+  </button>
+  <button mat-icon-button [matTooltipPosition]="tooltipPosition" [matTooltip]="tooltips[1]"
+    [disabled]="dataSource.data.length === 0" (click)="exportEntityData();" class="button-download">
+
+    <span class="material-symbols-rounded">
+      download
+    </span>
+
+  </button>
+
+</div>

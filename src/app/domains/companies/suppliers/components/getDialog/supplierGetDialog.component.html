@@ -1,0 +1,242 @@
+<span mat-dialog-title>
+  Detalhes do Fornecedor
+</span>
+<mat-dialog-content>
+
+  <div class="subtitle-container">
+
+    <span class="material-symbols-rounded">
+      info
+    </span>
+    <span class="subtitle">
+      Informações Gerais
+    </span>
+
+  </div>
+  <div class="content-container">
+
+    <span>
+      Cód. Identificador
+    </span>
+    <span [matTooltip]="tooltips[0]" [matTooltipPosition]="tooltipPosition"
+      (click)="clipboardService.copyTextToClipboard(supplier.publicId);" class="public-id">
+      {{supplier.publicId}}
+    </span>
+
+  </div>
+  <div class="content-container">
+
+    <span>
+      Nome
+    </span>
+    <span class="value">
+      {{supplier.name}}
+    </span>
+
+  </div>
+  <div class="content-container">
+
+    <span>
+      Cnpj
+    </span>
+    <span class="value">
+      {{supplier.cnpj}}
+    </span>
+
+  </div>
+  <div class="content-container-mult">
+
+    <div *ngIf="supplier.phone" class="content-subcontainer">
+
+      <span>
+        Telefone
+      </span>
+      <span class="value">
+        {{supplier.phone}}
+      </span>
+
+    </div>
+    <div *ngIf="supplier.whatsApp" class="content-subcontainer">
+
+      <span>
+        WhatsApp
+      </span>
+      <span class="value">
+        {{supplier.whatsApp}}
+      </span>
+
+    </div>
+
+  </div>
+  <div *ngIf="supplier.email" class="content-container">
+
+    <span>
+      Email
+    </span>
+    <span class="value">
+      {{supplier.email}}
+    </span>
+
+  </div>
+  <div *ngIf="supplier.website" class="content-container">
+
+    <span>
+      Website
+    </span>
+    <span>
+
+      <a [href]="supplier.website" target="_blank">
+        {{supplier.website}}
+      </a>
+
+    </span>
+
+  </div>
+  <div class="subtitle-container">
+
+    <span class="material-symbols-rounded">
+      home_work
+    </span>
+    <span class="subtitle">
+      Endereço
+    </span>
+
+  </div>
+  <div class="content-container-mult">
+
+    <div class="content-subcontainer">
+
+      <span>
+        Rua
+      </span>
+      <span class="value">
+        {{supplier.street}}
+      </span>
+
+    </div>
+    <div class="content-subcontainer">
+
+      <span>
+        Número
+      </span>
+      <span class="value">
+        {{supplier.number}}
+      </span>
+
+    </div>
+
+  </div>
+  <div class="content-container-mult">
+
+    <div *ngIf="supplier.complement" class="content-subcontainer">
+
+      <span>
+        Complemento
+      </span>
+      <span class="value">
+        {{supplier.complement}}
+      </span>
+
+    </div>
+    <div class="content-subcontainer">
+
+      <span>
+        Bairro
+      </span>
+      <span class="value">
+        {{supplier.district}}
+      </span>
+
+    </div>
+
+  </div>
+  <div class="content-container-mult">
+
+    <div class="content-subcontainer">
+
+      <span>
+        Cidade
+      </span>
+      <span class="value">
+        {{supplier.city}}
+      </span>
+
+    </div>
+    <div class="content-subcontainer">
+
+      <span>
+        Estado
+      </span>
+      <span class="value">
+        {{supplier.state}}
+      </span>
+
+    </div>
+
+  </div>
+  <div class="content-container">
+
+    <span>
+      Cep
+    </span>
+    <span class="value">
+      {{supplier.postalCode}}
+    </span>
+
+  </div>
+  <div class="subtitle-container">
+
+    <span class="material-symbols-rounded">
+      description
+    </span>
+    <span class="subtitle">
+      Notas
+    </span>
+    <button mat-icon-button *ngIf="allAllowed" [matTooltip]="tooltips[2]" [matTooltipPosition]="tooltipPosition"
+      (click)="dialogService.openActionDialog(dialogService.entityType.Supplier, supplier, 'notes');"
+      class="button-edit-notes">
+
+      <span class="material-symbols-rounded icon-edit-notes">
+        edit_square
+      </span>
+
+    </button>
+
+  </div>
+  <div *ngIf="supplier.notes && allAllowed" class="content-container">
+
+    <span class="value pre-formatted-text">
+      {{supplier.notes}}
+    </span>
+
+  </div>
+
+</mat-dialog-content>
+<mat-dialog-actions>
+
+  <div>
+
+    <button mat-icon-button *ngIf="allAllowed" [matTooltip]="tooltips[3]" [matTooltipPosition]="tooltipPosition"
+      (click)="dialogService.openActionDialog(dialogService.entityType.Supplier, supplier, 'put');" class="button-edit">
+
+      <span class="material-symbols-rounded">
+        edit_square
+      </span>
+
+    </button>
+    <button mat-icon-button *ngIf="someAllowed" [matTooltip]="tooltips[4]" [matTooltipPosition]="tooltipPosition"
+      (click)="dialogService.openActionDialog(dialogService.entityType.Supplier, supplier, 'delete');"
+      class="button-delete">
+
+      <span class="material-symbols-rounded">
+        delete
+      </span>
+
+    </button>
+
+  </div>
+  <button mat-button mat-dialog-close cdkFocusInitial>
+    Fechar
+  </button>
+
+</mat-dialog-actions>

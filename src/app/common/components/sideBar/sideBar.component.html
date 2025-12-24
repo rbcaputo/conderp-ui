@@ -1,0 +1,198 @@
+<div class="menu-container">
+
+  <div class="button-container">
+
+    <button mat-icon-button [routerLink]="['/home']">
+
+      <span class="material-symbols-rounded">
+        home
+      </span>
+
+    </button>
+    <span class="menu-label">
+      Início
+    </span>
+
+  </div>
+  <div class="button-container" *ngIf="buyDomain || saleDomain">
+
+    <button mat-icon-button [matMenuTriggerFor]="companies">
+
+      <span class="material-symbols-rounded">
+        apartment
+      </span>
+
+    </button>
+    <span class="menu-label">
+      Empresas
+    </span>
+
+  </div>
+  <mat-menu #companies="matMenu">
+
+    <button mat-menu-item [routerLink]="['/companies/customers']" *ngIf="saleDomain">
+
+      <div class="button-subcontainer">
+
+        <span class="material-symbols-rounded">
+          store
+        </span>
+        <span class="menu-label">
+          Clientes
+        </span>
+
+      </div>
+
+    </button>
+    <button mat-menu-item [routerLink]="['/companies/suppliers']" *ngIf="buyDomain">
+
+      <div class="button-subcontainer">
+
+        <span class="material-symbols-rounded">
+          shelves
+        </span>
+        <span class="menu-label">
+          Fornecedores
+        </span>
+
+      </div>
+
+    </button>
+
+  </mat-menu>
+  <div class="button-container" *ngIf="productionDomain || saleDomain">
+
+    <button mat-icon-button [matMenuTriggerFor]="stock">
+
+      <span class="material-symbols-rounded">
+        warehouse
+      </span>
+
+    </button>
+    <span class="menu-label">
+      Estoque
+    </span>
+
+  </div>
+  <mat-menu #stock="matMenu">
+
+    <button mat-menu-item [routerLink]="['/stock/packaging']" *ngIf="productionDomain">
+
+      <div class="button-subcontainer">
+
+        <span class="material-symbols-rounded">
+          inventory_2
+        </span>
+        <span class="menu-label">
+          Embalagens
+        </span>
+
+      </div>
+
+    </button>
+    <button mat-menu-item [routerLink]="['/stock/organics']" *ngIf="productionDomain">
+
+      <div class="button-subcontainer">
+
+        <span class="material-symbols-rounded">
+          grocery
+        </span>
+        <span class="menu-label">
+          Orgânicos
+        </span>
+
+      </div>
+
+    </button>
+    <button mat-menu-item [routerLink]="['/stock/products']" *ngIf="productionDomain || saleDomain">
+
+      <div class="button-subcontainer">
+
+        <span class="material-symbols-rounded">
+          trolley
+        </span>
+        <span class="menu-label">
+          Produtos
+        </span>
+
+      </div>
+
+    </button>
+
+  </mat-menu>
+  <div class="button-container">
+
+    <button mat-icon-button [matMenuTriggerFor]="orders" *ngIf="buyDomain || productionDomain || saleDomain">
+
+      <span class="material-symbols-rounded">
+        list_alt
+      </span>
+
+    </button>
+    <span class="menu-label">
+      Ordens
+    </span>
+
+  </div>
+  <mat-menu #orders="matMenu">
+
+    <button mat-menu-item [routerLink]="['/orders/buys']" *ngIf="buyDomain">
+
+      <div class="button-subcontainer">
+
+        <span class="material-symbols-rounded">
+          shopping_cart
+        </span>
+        <span class="menu-label">
+          Compras
+        </span>
+
+      </div>
+
+    </button>
+    <button mat-menu-item [routerLink]="['/orders/production']" *ngIf="productionDomain">
+
+      <div class="button-subcontainer">
+
+        <span class="material-symbols-rounded">
+          factory
+        </span>
+        <span class="menu-label">
+          Produção
+        </span>
+
+      </div>
+
+    </button>
+    <button mat-menu-item [routerLink]="['/orders/sales']" *ngIf="saleDomain">
+
+      <div class="button-subcontainer">
+
+        <span class="material-symbols-rounded">
+          sell
+        </span>
+        <span class="menu-label">
+          Vendas
+        </span>
+
+      </div>
+
+    </button>
+
+  </mat-menu>
+  <div class="button-container" *ngIf="userDomain">
+
+    <button mat-icon-button [routerLink]="['/personnel/users']">
+
+      <span class="material-symbols-rounded">
+        group
+      </span>
+
+    </button>
+    <span class="menu-label">
+      Usuários
+    </span>
+
+  </div>
+
+</div>

@@ -1,0 +1,344 @@
+<span mat-dialog-title>
+  Adicionar Usuário
+</span>
+<mat-dialog-content>
+
+  <form [formGroup]="postForm">
+
+    <div class="subtitle-container">
+
+      <span class="material-symbols-rounded">
+        info
+      </span>
+      <span class="subtitle">
+        Informações Gerais
+      </span>
+
+    </div>
+    <mat-form-field>
+
+      <mat-label>
+        Nome
+      </mat-label>
+      <input type="text" matInput formControlName="name" />
+      @if (postForm.get("name")?.hasError("required")) {
+      <mat-error>
+        Campo obrigatório
+      </mat-error>
+      }
+      @if (!postForm.get("name")?.hasError("required") &&
+      postForm.get("name")?.hasError("pattern")) {
+      <mat-error>
+        Dado inválido
+      </mat-error>
+      }
+
+    </mat-form-field>
+    <mat-form-field>
+
+      <mat-label>
+        Cpf
+      </mat-label>
+      <input type="text" matInput formControlName="cpf" />
+      @if (postForm.get("cpf")?.hasError("required")) {
+      <mat-error>
+        Campo obrigatório
+      </mat-error>
+      }
+      @if (!postForm.get("cpf")?.hasError("required") &&
+      postForm.get("cpf")?.hasError("pattern")) {
+      <mat-error>
+        Dado inválido
+      </mat-error>
+      }
+
+    </mat-form-field>
+    <div class="form-field-container">
+
+      <mat-form-field>
+
+        <mat-label>
+          Telefone
+        </mat-label>
+        <input type="tel" matInput formControlName="phone" />
+        @if (postForm.get("phone")?.hasError("pattern")) {
+        <mat-error>
+          Dado inválido
+        </mat-error>
+        }
+
+      </mat-form-field>
+      <mat-form-field>
+
+        <mat-label>
+          WhatsApp
+        </mat-label>
+        <input type="tel" matInput formControlName="whatsApp" />
+        @if (postForm.get("whatsApp")?.hasError("pattern")) {
+        <mat-error>
+          Dado inválido
+        </mat-error>
+        }
+
+      </mat-form-field>
+
+    </div>
+    <mat-form-field>
+
+      <mat-label>
+        Email
+      </mat-label>
+      <input type="email" matInput formControlName="email" />
+      @if (postForm.get("email")?.hasError("required")) {
+      <mat-error>
+        Campo obrigatório
+      </mat-error>
+      }
+      @if (!postForm.get("email")?.hasError("required") && postForm.get("email")?.hasError("email")) {
+      <mat-error>
+        Dado inválido
+      </mat-error>
+      }
+
+    </mat-form-field>
+    <mat-form-field>
+
+      <mat-label>
+        Função
+      </mat-label>
+      <mat-select formControlName="userType">
+
+        <mat-option *ngFor="let type of USER_TYPE_OPTS | keyvalue" [value]="type.value">
+          {{type.key}}
+        </mat-option>
+
+      </mat-select>
+      @if (postForm.get("userType")?.hasError("required")) {
+      <mat-error>
+        Campo obrigatório
+      </mat-error>
+      }
+
+    </mat-form-field>
+    <div class="form-field-container">
+      <mat-form-field>
+
+        <mat-label>
+          Senha
+        </mat-label>
+        <input type="password" matInput formControlName="password" />
+        @if (postForm.get("password")?.hasError("required")) {
+        <mat-error>
+          Campo obrigatório
+        </mat-error>
+        }
+        @if ((!postForm.get("password")?.hasError("required") &&
+        !postForm.get("passwordConfirmation")?.hasError("required")) &&
+        postForm.get("password")?.hasError("passwordMismatch")) {
+        <mat-error>
+          Senha inválida
+        </mat-error>
+        }
+
+      </mat-form-field>
+      <mat-form-field>
+
+        <mat-label>
+          Confirmar senha
+        </mat-label>
+        <input type="password" matInput formControlName="passwordConfirmation" />
+        @if (postForm.get("passwordConfirmation")?.hasError("required")) {
+        <mat-error>
+          Campo obrigatório
+        </mat-error>
+        }
+        @if ((!postForm.get("password")?.hasError("required") &&
+        !postForm.get("passwordConfirmation")?.hasError("required")) &&
+        postForm.get("passwordConfirmation")?.hasError("passwordMismatch")) {
+        <mat-error>
+          Senha inválida
+        </mat-error>
+        }
+
+      </mat-form-field>
+
+    </div>
+    <div class="subtitle-container">
+
+      <span class="material-symbols-rounded">
+        home_work
+      </span>
+      <span class="subtitle">
+        Endereço
+      </span>
+
+    </div>
+    <mat-form-field>
+
+      <mat-label>
+        Cep
+      </mat-label>
+      <input type="text" matInput formControlName="postalCode" (blur)="fillAddressByPostalCodeAsync($event.target!);" />
+      @if (postForm.get("postalCode")?.hasError("required")) {
+      <mat-error>
+        Campo obrigatório
+      </mat-error>
+      }
+      @if (!postForm.get("postalCode")?.hasError("required") &&
+      postForm.get("postalCode")?.hasError("pattern")) {
+      <mat-error>
+        Dado inválido
+      </mat-error>
+      }
+      @if (postForm.get("postalCode")?.hasError("invalidPostalCode")) {
+      <mat-error>
+        Cep inexistente
+      </mat-error>
+      }
+
+    </mat-form-field>
+    <div class="form-field-container">
+
+      <mat-form-field>
+
+        <mat-label>
+          Rua
+        </mat-label>
+        <input type="text" matInput formControlName="street" />
+        @if (postForm.get("street")?.hasError("required")) {
+        <mat-error>
+          Campo obrigatório
+        </mat-error>
+        }
+        @if (!postForm.get("street")?.hasError("required") &&
+        postForm.get("street")?.hasError("pattern")) {
+        <mat-error>
+          Dado inválido
+        </mat-error>
+        }
+
+      </mat-form-field>
+      <mat-form-field>
+
+        <mat-label>
+          Número
+        </mat-label>
+        <input type="text" matInput formControlName="number" />
+        @if (postForm.get("number")?.hasError("required")) {
+        <mat-error>
+          Campo obrigatório
+        </mat-error>
+        }
+        @if (!postForm.get("number")?.hasError("required") &&
+        postForm.get("number")?.hasError("pattern")) {
+        <mat-error>
+          Dado inválido
+        </mat-error>
+        }
+
+      </mat-form-field>
+
+    </div>
+    <div class="form-field-container">
+
+      <mat-form-field>
+
+        <mat-label>
+          Complemento
+        </mat-label>
+        <input type="text" matInput formControlName="complement" />
+        @if (postForm.get("complement")?.hasError("pattern")) {
+        <mat-error>
+          Dado inválido
+        </mat-error>
+        }
+      </mat-form-field>
+      <mat-form-field>
+
+        <mat-label>
+          Bairro
+        </mat-label>
+        <input type="text" matInput formControlName="district" />
+        @if (postForm.get("district")?.hasError("required")) {
+        <mat-error>
+          Campo obrigatório
+        </mat-error>
+        }
+        @if (!postForm.get("district")?.hasError("required") &&
+        postForm.get("district")?.hasError("pattern")) {
+        <mat-error>
+          Dado inválido
+        </mat-error>
+        }
+      </mat-form-field>
+
+    </div>
+    <div class="form-field-container">
+
+      <mat-form-field>
+
+        <mat-label>
+          Cidade
+        </mat-label>
+        <input type="text" matInput formControlName="city" />
+        @if (postForm.get("city")?.hasError("required")) {
+        <mat-error>
+          Campo obrigatório
+        </mat-error>
+        }
+        @if (!postForm.get("city")?.hasError("required") &&
+        postForm.get("city")?.hasError("pattern")) {
+        <mat-error>
+          Dado inválido
+        </mat-error>
+        }
+
+      </mat-form-field>
+      <mat-form-field>
+
+        <mat-label>
+          Estado
+        </mat-label>
+        <mat-select formControlName="state">
+
+          <mat-option *ngFor="let state of states | keyvalue" [value]="state.value">
+            {{state.key}}
+          </mat-option>
+
+        </mat-select>
+        @if (postForm.get("state")?.hasError("required")) {
+        <mat-error>
+          Campo obrigatório
+        </mat-error>
+        }
+        @if (!postForm.get("state")?.hasError("required") &&
+        postForm.get("state")?.hasError("pattern")) {
+        <mat-error>
+          Dado inválido
+        </mat-error>
+        }
+
+      </mat-form-field>
+
+    </div>
+
+  </form>
+
+</mat-dialog-content>
+<mat-dialog-actions>
+
+  <button mat-icon-button [matTooltip]="tooltip" [matTooltipPosition]="tooltipPosition" (click)="postForm.reset();">
+
+    <span class="material-symbols-rounded">
+      restart_alt
+    </span>
+
+  </button>
+  <button mat-button (click)="addUserAsync();">
+    Enviar
+  </button>
+  <button mat-button mat-dialog-close cdkFocusInitial>
+    Cancelar
+  </button>
+
+</mat-dialog-actions>

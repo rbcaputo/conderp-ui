@@ -1,0 +1,33 @@
+<div class="wrapper">
+
+  <h2 mat-dialog-title
+      class="dialog-remove-title">
+    Remover Embalagem
+  </h2>
+  <mat-dialog-content>
+    <span>
+      Tem certeza que deseja remover permanentemente a Embalagem com <br /> Cód. Identificador
+
+      <span class="public-id">
+        {{packaging.publicId}}
+      </span>
+
+      ?
+    </span>
+    <mat-dialog-actions>
+
+      <button mat-button
+              (click)="deletePackagingByPublicIdAsync(packaging.publicId);">
+        Ok
+      </button>
+      <button mat-button
+              mat-dialog-close
+              cdkFocusInitial>
+        Cancelar
+      </button>
+
+    </mat-dialog-actions>
+
+  </mat-dialog-content>
+
+</div>

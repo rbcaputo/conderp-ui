@@ -1,0 +1,26 @@
+<span mat-dialog-title class="dialog-remove-title">
+  Remover Fornecedor
+</span>
+<mat-dialog-content>
+
+  <span>
+
+    Tem certeza que deseja remover permanentemente o Fornecedor com <br /> Cód. Identificador
+    <span class="public-id">
+      {{supplier.publicId}}
+    </span>
+    ?
+
+  </span>
+
+</mat-dialog-content>
+<mat-dialog-actions>
+
+  <button mat-button (click)="deleteSupplierByPublicIdAsync(supplier.publicId);">
+    Ok
+  </button>
+  <button mat-button mat-dialog-close cdkFocusInitial>
+    Cancelar
+  </button>
+
+</mat-dialog-actions>

@@ -1,0 +1,26 @@
+<span mat-dialog-title>
+  Remover Ordem de Compra
+</span>
+<mat-dialog-content>
+
+  <span>
+
+    Tem certeza que deseja remover permanentemente o Pedido de Compra com <br /> Cód. Identificador
+    <span class="public-id">
+      {{sale.publicId}}
+    </span>
+    ?
+
+  </span>
+
+</mat-dialog-content>
+<mat-dialog-actions>
+
+  <button mat-button (click)="deleteSaleByPublicIdAsync(sale.publicId);">
+    Ok
+  </button>
+  <button mat-button mat-dialog-close cdkFocusInitial>
+    Cancelar
+  </button>
+
+</mat-dialog-actions>

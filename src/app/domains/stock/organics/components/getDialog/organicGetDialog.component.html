@@ -1,0 +1,223 @@
+<span mat-dialog-title>
+  Detalhes do Orgânico
+</span>
+<mat-dialog-content>
+
+  <div class="subtitle-container">
+
+    <span class="material-symbols-rounded">
+      info
+    </span>
+    <span class="subtitle">
+      Informações
+    </span>
+
+  </div>
+  <div class="content-container-mult">
+
+    <div class="content-subcontainer">
+
+      <span>
+        Cód. Identificador
+      </span>
+      <span [matTooltip]="tooltips[0]" [matTooltipPosition]="tooltipPosition"
+        (click)="clipboardService.copyTextToClipboard(organic.publicId);" class="public-id">
+        {{organic.publicId}}
+      </span>
+
+    </div>
+    <div *ngIf="organic.storageCode" class="content-subcontainer">
+
+      <span>
+        Cód. Estoque
+      </span>
+      <span class="value">
+        {{organic.storageCode}}
+      </span>
+
+    </div>
+
+  </div>
+  <div class="content-container-mult">
+
+    <div class="content-subcontainer">
+
+      <span>
+        Tipo
+      </span>
+      <span class="value">
+        {{organic.organicType | typeName: ORGANIC_TYPE_NAMES}}
+      </span>
+
+    </div>
+    <div class="content-subcontainer">
+
+      <span> Subtipo </span>
+      <span class="value">
+        {{organic.organicSubtype | typeName: ORGANIC_SUBTYPE_NAMES}}
+      </span>
+
+    </div>
+
+  </div>
+  <div class="content-container-mult">
+
+    <div class="content-subcontainer">
+
+      <span>
+        Quantidade (kg)
+      </span>
+      <span class="value">
+        {{organic.amount}}
+      </span>
+
+    </div>
+    <div *ngIf="organic.origin" class="content-subcontainer">
+
+      <span>
+        Origem
+      </span>
+      <span class="value">
+        {{organic.origin}}
+      </span>
+
+    </div>
+
+  </div>
+  <div *ngIf="organic.receiptDate" class="subtitle-container">
+
+    <span class="material-symbols-rounded">
+      shelves
+    </span>
+    <span class="subtitle">
+      Fornecimento
+    </span>
+
+  </div>
+  <div class="content-container-mult">
+
+    <div *ngIf="organic.receiptDate" class="content-subcontainer">
+
+      <span>
+        Data Recebimento
+      </span>
+      <span class="value">
+        {{organic.receiptDate | date: "dd/MM/yyyy"}}
+      </span>
+
+    </div>
+    <div *ngIf="organic.supplier" class="content-subcontainer">
+
+      <span>
+        Cód. Fornecedor
+      </span>
+      <span [matTooltip]="tooltips[1]" [matTooltipPosition]="tooltipPosition"
+        (click)="dialogService.openGetDialog(dialogService.entityType.Supplier, organic.supplier!);" class="public-id">
+        {{organic.supplier.publicId}}
+      </span>
+
+    </div>
+
+  </div>
+  <div *ngIf="organic.processDate" class="subtitle-container">
+
+    <span class="material-symbols-rounded">
+      conveyor_belt
+    </span>
+    <span class="subtitle">
+      Processamento
+    </span>
+
+  </div>
+  <div class="content-container-mult">
+
+    <div *ngIf="organic.processDate" class="content-subcontainer">
+
+      <span>
+        Data Processamento
+      </span>
+      <span class="value">
+        {{organic.processDate | date: "dd/MM/yyyy"}}
+      </span>
+
+    </div>
+    <div *ngIf="organic.organic" class="content-subcontainer">
+
+      <span>
+        Cód. Orgânico Origem
+      </span>
+      <span (click)="dialogService.openGetDialog(dialogService.entityType.Organic, organic.organic!);"
+        class="public-id">
+        {{organic.organic.publicId}}
+      </span>
+
+    </div>
+
+  </div>
+  <div class="subtitle-container">
+
+    <span class="material-symbols-rounded">
+      description
+    </span>
+    <span class="subtitle">
+      Notas
+    </span>
+    <button mat-icon-button *ngIf="allAllowed" [matTooltip]="tooltips[2]" [matTooltipPosition]="tooltipPosition"
+      (click)="dialogService.openActionDialog(dialogService.entityType.Organic, organic, 'notes');"
+      class="button-edit-notes">
+
+      <span class="material-symbols-rounded icon-edit-notes">
+        edit_square
+      </span>
+
+    </button>
+
+  </div>
+  <div *ngIf="organic.notes && allAllowed" class="content-container">
+
+    <span class="value pre-formatted-text">
+      {{organic.notes}}
+    </span>
+
+  </div>
+
+</mat-dialog-content>
+<mat-dialog-actions>
+
+  <div>
+
+    <button mat-icon-button *ngIf="allAllowed" [matTooltip]="tooltips[5]" [matTooltipPosition]="tooltipPosition"
+      (click)="dialogService.openPostDialog(dialogService.entityType.Production, organic);" class="button-production">
+
+      <span class="material-symbols-rounded">
+        conveyor_belt
+      </span>
+
+    </button>
+
+    <button mat-icon-button *ngIf="allAllowed" [matTooltip]="tooltips[3]" [matTooltipPosition]="tooltipPosition"
+      (click)="dialogService.openActionDialog(dialogService.entityType.Organic, organic, 'put');" class="button-edit">
+
+      <span class="material-symbols-rounded">
+        edit_square
+      </span>
+
+    </button>
+
+    <button mat-icon-button *ngIf="someAllowed" [matTooltip]="tooltips[4]" [matTooltipPosition]="tooltipPosition"
+      (click)="dialogService.openActionDialog(dialogService.entityType.Organic, organic, 'delete');"
+      class="button-delete">
+
+      <span class="material-symbols-rounded">
+        delete
+      </span>
+
+    </button>
+
+  </div>
+
+  <button mat-button mat-dialog-close cdkFocusInitial>
+    Fechar
+  </button>
+
+</mat-dialog-actions>

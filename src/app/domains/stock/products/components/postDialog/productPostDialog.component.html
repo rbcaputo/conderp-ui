@@ -1,0 +1,206 @@
+<span mat-dialog-title>
+  Adicionar Produto
+</span>
+<mat-dialog-content>
+
+  <form [formGroup]="postForm">
+
+    <div class="subtitle-container">
+
+      <span class="material-symbols-rounded">
+        info
+      </span>
+      <span class="subtitle">
+        Informações Gerais
+      </span>
+
+    </div>
+    <mat-form-field>
+
+      <mat-label>
+        Cód. Estoque
+      </mat-label>
+      <input type="text" matInput formControlName="storageCode" />
+      @if (postForm.get("storageCode")?.hasError("pattern")) {
+      <mat-error>
+        Dado inválido
+      </mat-error>
+      }
+
+    </mat-form-field>
+    <div class="form-field-container">
+
+      <mat-form-field>
+
+        <mat-label>
+          Tipo
+        </mat-label>
+        <mat-select formControlName="productType">
+
+          <mat-option *ngFor="let type of PRODUCT_TYPE_OPTS | keyvalue" [value]="type.value">
+            {{type.key}}
+          </mat-option>
+
+        </mat-select>
+        @if (postForm.get("productType")?.hasError("required")) {
+        <mat-error>
+          Campo obrigatório
+        </mat-error>
+        }
+
+      </mat-form-field>
+      <mat-form-field>
+
+        <mat-label>
+          Quantidade
+        </mat-label>
+        <input type="number" matInput formControlName="amount" />
+        <span matTextSuffix>
+          &nbsp;kg
+        </span>
+        @if (postForm.get("amount")?.hasError("required")) {
+        <mat-error>
+          Campo obrigatório
+        </mat-error>
+        }
+        @if (!postForm.get("amount")?.hasError("required") &&
+        (postForm.get("amount")?.hasError("min") ||
+        postForm.get("amount")?.hasError("max"))) {
+        <mat-error>
+          Dado inválido
+        </mat-error>
+        }
+        <mat-hint align="end">
+          1 - 1000
+        </mat-hint>
+
+      </mat-form-field>
+
+    </div>
+    <div class="form-field-container">
+
+      <mat-form-field>
+
+        <mat-label>
+          Data Validade
+        </mat-label>
+        <input type="date" matInput formControlName="expirationDate" />
+
+      </mat-form-field>
+      <mat-form-field>
+
+        <mat-label>
+          Cód. Barras
+        </mat-label>
+        <input type="text" matInput formControlName="barcode" />
+        @if (postForm.get("barcode")?.hasError("pattern")) {
+        <mat-error>
+          Dado inválido
+        </mat-error>
+        }
+
+      </mat-form-field>
+
+    </div>
+    <div class="subtitle-container">
+
+      <span class="material-symbols-rounded">
+        grocery
+      </span>
+      <span class="material-symbols-rounded">
+        inventory_2
+      </span>
+      <span class="subtitle">
+        Orgânico e Embalagem
+      </span>
+
+    </div>
+    <div class="form-field-container">
+
+      <mat-form-field>
+
+        <mat-label>
+          Cód. Orgânico
+        </mat-label>
+        <input type="text" matInput formControlName="organicPublicId" />
+        @if (postForm.get("organicPublicId")?.hasError("required")) {
+        <mat-error>
+          Campo obrigatório
+        </mat-error>
+        }
+        @if (!postForm.get("organicPublicId")?.hasError("required") &&
+        postForm.get("organicPublicId")?.hasError("pattern")) {
+        <mat-error>
+          Dado inválido
+        </mat-error>
+        }
+
+      </mat-form-field>
+      <mat-form-field>
+
+        <mat-label>
+          Cód. Embalagem
+        </mat-label>
+        <input type="text" matInput formControlName="packagingPublicId" />
+        @if (postForm.get("packagingPublicId")?.hasError("required")) {
+        <mat-error>
+          Campo obrigatório
+        </mat-error>
+        }
+        @if (!postForm.get("packagingPublicId")?.hasError("required") &&
+        postForm.get("packagingPublicId")?.hasError("pattern")) {
+        <mat-error>
+          Dado inválido
+        </mat-error>
+        }
+
+      </mat-form-field>
+
+    </div>
+    <div class="subtitle-container">
+
+      <span class="material-symbols-rounded">
+        description
+      </span>
+      <span class="subtitle">
+        Notas
+      </span>
+
+    </div>
+    <mat-form-field>
+
+      <mat-label>
+        Notas
+      </mat-label>
+      <textarea matInput maxlength="500" formControlName="notes" #notes></textarea>
+      @if (postForm.getError("notes")?.hasError("maxLength")) {
+      <mat-error>
+        Excesso de caracteres
+      </mat-error>
+      }
+      <mat-hint align="end">
+        {{notes.value.length}} / 500
+      </mat-hint>
+
+    </mat-form-field>
+
+  </form>
+
+</mat-dialog-content>
+<mat-dialog-actions>
+
+  <button mat-icon-button [matTooltip]="tooltip" [matTooltipPosition]="tooltipPosition" (click)="postForm.reset();">
+
+    <span class="material-symbols-rounded">
+      restart_alt
+    </span>
+
+  </button>
+  <button mat-button (click)="addProductAsync();">
+    Enviar
+  </button>
+  <button mat-button mat-dialog-close cdkFocusInitial>
+    Cancelar
+  </button>
+
+</mat-dialog-actions>

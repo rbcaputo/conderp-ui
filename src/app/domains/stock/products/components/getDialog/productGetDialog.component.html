@@ -1,0 +1,207 @@
+<span mat-dialog-title>
+  Detalhes do Produto
+</span>
+<mat-dialog-content>
+
+  <div class="subtitle-container">
+
+    <span class="material-symbols-rounded">
+      info
+    </span>
+    <span class="subtitle">
+      Informações Gerais
+    </span>
+
+  </div>
+  <div class="content-container-mult">
+
+    <div class="content-subcontainer">
+
+      <span>
+        Cód. Identificador
+      </span>
+      <span [matTooltip]="tooltips[0]" [matTooltipPosition]="tooltipPosition"
+        (click)="clipboardService.copyTextToClipboard(product.publicId);" class="public-id">
+        {{product.publicId}}
+      </span>
+
+    </div>
+    <div *ngIf="product.storageCode" class="content-subcontainer">
+
+      <span>
+        Cód. Estoque
+      </span>
+      <span class="value">
+        {{product.storageCode}}
+      </span>
+
+    </div>
+
+  </div>
+  <div class="content-container-mult">
+
+    <div class="content-subcontainer">
+
+      <span>
+        Tipo
+      </span>
+      <span class="value">
+        {{product.productType | typeName: PRODUCT_TYPE_NAMES}}
+      </span>
+
+    </div>
+    <div class="content-subcontainer">
+      <span>
+        Subtipo
+      </span>
+      <span class="value">
+        {{product.organic.organicType | typeName: ORGANIC_TYPE_NAMES}} | {{product.organic.organicSubtype | typeName:
+        ORGANIC_SUBTYPE_NAMES}}
+      </span>
+
+    </div>
+
+  </div>
+  <div class="content-container-mult">
+
+    <div class="content-subcontainer">
+
+      <span>
+        Quantidade
+      </span>
+      <span class="value">
+        {{product.amount}}
+      </span>
+
+    </div>
+
+  </div>
+  <div class="content-container-mult">
+
+    <div class="content-subcontainer">
+
+      <span>
+        Data Envase
+      </span>
+      <span class="value">
+        {{product.packagingDate | date: "dd/MM/yyyy"}}
+      </span>
+
+    </div>
+    <div *ngIf="product.expirationDate" class="content-subcontainer">
+
+      <span>
+        Data Validade
+      </span>
+      <span class="value">
+        {{product.expirationDate | date: "dd/MM/yyyy"}}
+      </span>
+
+    </div>
+
+  </div>
+  <div *ngIf="product.barcode" class="content-container">
+
+    <span>
+      Cód. Barras
+    </span>
+    <span class="value">
+      {{product.barcode}}
+    </span>
+
+  </div>
+  <div class="subtitle-container">
+
+    <span class="material-symbols-rounded">
+      grocery
+    </span>
+    <span class="material-symbols-rounded">
+      inventory_2
+    </span>
+    <span class="subtitle">
+      Orgânico Origem e Embalagem
+    </span>
+
+  </div>
+  <div class="content-container-mult">
+
+    <div class="content-subcontainer">
+
+      <span>
+        Cód. Orgânico Origem
+      </span>
+      <span [matTooltip]="tooltips[1]" [matTooltipPosition]="tooltipPosition"
+        (click)="dialogService.openGetDialog(dialogService.entityType.Organic, product.organic);" class="public-id">
+        {{product.organic.publicId}}
+      </span>
+
+    </div>
+    <div class="content-subcontainer">
+
+      <span>
+        Cód. Embalagem
+      </span>
+      <span [matTooltip]="tooltips[1]" [matTooltipPosition]="tooltipPosition"
+        (click)="dialogService.openGetDialog(dialogService.entityType.Organic, product.packaging);" class="public-id">
+        {{product.packaging.publicId}}
+      </span>
+
+    </div>
+
+  </div>
+  <div class="subtitle-container">
+
+    <span class="material-symbols-rounded">
+      description
+    </span>
+    <span class="subtitle">
+      Notas
+    </span>
+    <button mat-icon-button *ngIf="allAllowed" [matTooltip]="tooltips[2]" [matTooltipPosition]="tooltipPosition"
+      (click)="dialogService.openActionDialog(dialogService.entityType.Product, product, 'notes');"
+      class="edit-notes-button">
+
+      <span class="material-symbols-rounded edit-notes-icon">
+        edit_square
+      </span>
+
+    </button>
+
+  </div>
+  <div *ngIf="product.notes && allAllowed" class="content-container">
+
+    <span class="value pre-formatted-text">
+      {{product.notes}}
+    </span>
+
+  </div>
+
+</mat-dialog-content>
+<mat-dialog-actions>
+
+  <div>
+
+    <button mat-icon-button *ngIf="domainAllowed" [matTooltip]="tooltips[3]" [matTooltipPosition]="tooltipPosition"
+      (click)="dialogService.openActionDialog(dialogService.entityType.Product, product, 'put');" class="button-edit">
+
+      <span class="material-symbols-rounded">
+        edit_square
+      </span>
+
+    </button>
+    <button mat-icon-button *ngIf="someAllowed" [matTooltip]="tooltips[4]" [matTooltipPosition]="tooltipPosition"
+      (click)="dialogService.openActionDialog(dialogService.entityType.Product, product, 'delete');"
+      class="button-delete">
+
+      <span class="material-symbols-rounded">
+        delete
+      </span>
+
+    </button>
+
+  </div>
+  <button mat-button mat-dialog-close cdkFocusInitial>
+    Fechar
+  </button>
+
+</mat-dialog-actions>

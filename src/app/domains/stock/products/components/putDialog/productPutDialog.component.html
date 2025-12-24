@@ -1,0 +1,91 @@
+<span mat-dialog-title>
+  Editar Produto
+</span>
+<mat-dialog-content>
+
+  <form [formGroup]="putForm">
+
+    <div class="subtitle-container">
+
+      <span class="material-symbols-rounded">
+        info
+      </span>
+      <span class="subtitle">
+        Informações
+      </span>
+
+    </div>
+    <mat-form-field>
+
+      <mat-label>
+        Cód. Estoque
+      </mat-label>
+      <input type="text" matInput formControlName="storageCode" />
+      @if (putForm.get("storageCode")?.hasError("pattern")) {
+      <mat-error>
+        Dado inválido
+      </mat-error>
+      }
+
+    </mat-form-field>
+    <div class="form-field-container">
+
+      <mat-form-field>
+
+        <mat-label>
+          Quantidade
+        </mat-label>
+        <input type="number" matInput formControlName="amount" />
+        @if (putForm.get("amount")?.hasError("required")) {
+        <mat-error>
+          Campo obrigatório
+        </mat-error>
+        }
+        @if (!putForm.get("amount")?.hasError("required") &&
+        (putForm.get("amount")?.hasError("min") ||
+        putForm.get("amount")?.hasError("max"))) {
+        <mat-error>
+          Dado inválido
+        </mat-error>
+        }
+        <mat-hint align="end">
+          1 - 1000
+        </mat-hint>
+
+      </mat-form-field>
+      <mat-form-field>
+
+        <mat-label>
+          Cód. Barras
+        </mat-label>
+        <input type="text" matInput formControlName="barcode" />
+        @if (putForm.get("barcode")?.hasError("pattern")) {
+        <mat-error>
+          Dado inválido
+        </mat-error>
+        }
+
+      </mat-form-field>
+
+    </div>
+
+  </form>
+
+</mat-dialog-content>
+<mat-dialog-actions>
+
+  <button mat-icon-button [matTooltip]="tooltip" [matTooltipPosition]="tooltipPosition" (click)="putForm.reset();">
+
+    <span class="material-symbols-rounded">
+      restart_alt
+    </span>
+
+  </button>
+  <button mat-button (click)="updateProductByPublicIdAsync(product.publicId);">
+    Enviar
+  </button>
+  <button mat-button mat-dialog-close cdkFocusInitial>
+    Cancelar
+  </button>
+
+</mat-dialog-actions>

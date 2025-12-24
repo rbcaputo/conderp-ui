@@ -1,0 +1,63 @@
+<div class="wrapper">
+
+  <span class="title">
+    CondERP
+  </span>
+  <div class="login-container">
+
+    <div class="subtitle-container">
+
+      <span class="subtitle">
+        LOGIN
+      </span>
+
+    </div>
+    <form [formGroup]="loginForm" (keydown.enter)="userLoginAsync();">
+
+      <mat-form-field>
+
+        <mat-label>
+          Usuário
+        </mat-label>
+        <input type="text" matInput formControlName="username" />
+        @if (loginForm.get("username")?.hasError("required")) {
+        <mat-error>
+          Campo obrigatório
+        </mat-error>
+        }
+
+      </mat-form-field>
+      <mat-form-field>
+
+        <mat-label>
+          Senha
+        </mat-label>
+        <input [type]="isPasswordVisible() ? 'password' : 'text'" matInput formControlName="password" />
+        @if (loginForm.get("password")?.hasError("required")) {
+        <mat-error>
+          Campo obrigatório
+        </mat-error>
+        }
+        <button type="button" mat-icon-button matSuffix (click)="togglePasswordVisibility($event);"
+          (keydown.enter)="$event.stopPropagation();">
+
+          <span class="material-symbols-rounded">
+            {{isPasswordVisible() ? "visibility_off" : "visibility"}}
+          </span>
+
+        </button>
+
+      </mat-form-field>
+
+    </form>
+    <div class="button-container">
+
+      <button mat-flat-button (click)="userLoginAsync();">
+        Entrar
+      </button>
+
+    </div>
+
+  </div>
+
+</div>

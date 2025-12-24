@@ -1,0 +1,194 @@
+<span mat-dialog-title>
+  Detalhes da Ordem de Compra
+</span>
+<mat-dialog-content>
+
+  <div class="subtitle-container">
+
+    <span class="material-symbols-rounded">
+      info
+    </span>
+    <span>
+      Informações Gerais
+    </span>
+
+  </div>
+  <div class="content-container">
+
+    <span>
+      Cód. Identificador
+    </span>
+    <span [matTooltip]="tooltips[0]" [matTooltipPosition]="tooltipPosition"
+      (click)="clipboardService.copyTextToClipboard(buy.publicId);" class="public-id">
+      {{buy.publicId}}
+    </span>
+
+  </div>
+  <div class="content-container">
+
+    <span>
+      Solicitante
+    </span>
+    <span class="value">
+      {{buy.name}}
+    </span>
+
+  </div>
+  <div class="content-container-mult">
+
+    <div class="content-subcontainer">
+
+      <span>
+        Tipo
+      </span>
+      <span class="value">
+        {{buy.buyType | typeName: BUY_TYPE_NAMES}}
+      </span>
+
+    </div>
+    <div class="content-subcontainer">
+
+      <span>
+        Subtipo
+      </span>
+      @if (buy.buyType === buyTypes.Organic) {
+      <span class="value">
+        {{organicBuySubtype | typeName: ORGANIC_TYPE_NAMES}} - {{buy.organicSubtype! | typeName: ORGANIC_SUBTYPE_NAMES}}
+      </span>
+      } @else if (buy.buyType === buyTypes.Packaging) {
+      <span class="value">
+        {{packagingBuySubtype | typeName: PACKAGING_TYPE_NAMES}}
+      </span>
+      }
+
+    </div>
+
+  </div>
+  <div class="content-container-mult">
+
+    <div class="content-subcontainer">
+
+      <span>
+        Quantidade (kg/un)
+      </span>
+      <span class="value">
+        {{buy.amount}}
+      </span>
+
+    </div>
+    <div class="content-subcontainer">
+
+      <span>
+        Situação
+      </span>
+      <span class="value">
+        {{buy.status | typeName: ORDER_STATUS_NAMES}}
+      </span>
+
+    </div>
+
+  </div>
+  <div class="content-container-mult">
+
+    <div class="content-subcontainer">
+
+      <span>
+        Data de Abertura
+      </span>
+      <span class="value">
+        {{buy.openDate | date: "dd/MM/yyyy"}}
+      </span>
+
+    </div>
+    <div *ngIf="buy.closeDate" class="content-subcontainer">
+
+      <span>
+        Data de Fechamento
+      </span>
+      <span class="value">
+        {{buy.closeDate | date: "dd/MM/yyyy"}}
+      </span>
+
+    </div>
+
+  </div>
+  <div class="content-container-mult">
+
+    <div class="content-subcontainer">
+
+      <span>
+        Cód. Fornecedor
+      </span>
+      <span [matTooltip]="tooltips[1]" [matTooltipPosition]="tooltipPosition"
+        (click)="dialogService.openGetDialog(dialogService.entityType.Supplier, buy.supplier!);" class="public-id">
+        {{buy.supplier?.publicId}}
+      </span>
+
+    </div>
+    <div *ngIf="buy.price" class="content-subcontainer">
+
+      <span>
+        Preço
+      </span>
+      <span class="value">
+        {{buy.price}}
+      </span>
+
+    </div>
+
+  </div>
+  <div class="subtitle-container">
+
+    <span class="material-symbols-rounded">
+      description
+    </span>
+    <span class="subtitle">
+      Notas
+    </span>
+    <button mat-icon-button *ngIf="allAllowed" [matTooltip]="tooltips[2]" [matTooltipPosition]="tooltipPosition"
+      (click)="dialogService.openActionDialog(dialogService.entityType.Buy, buy, 'notes');" class="button-edit-notes">
+
+      <span class="material-symbols-rounded icon-edit-notes">
+        edit_square
+      </span>
+
+    </button>
+
+  </div>
+  <div *ngIf="buy.notes && allAllowed" class="content-container">
+
+    <span class="value pre-formatted-text">
+      {{buy.notes}}
+    </span>
+
+  </div>
+
+</mat-dialog-content>
+<mat-dialog-actions>
+
+  <div>
+
+    <button mat-icon-button *ngIf="!isDisabled && allAllowed" [matTooltip]="tooltips[3]"
+      [matTooltipPosition]="tooltipPosition"
+      (click)="dialogService.openActionDialog(dialogService.entityType.Buy, buy, 'put');" class="button-edit">
+
+      <span class="material-symbols-rounded">
+        edit_square
+      </span>
+
+    </button>
+    <button mat-icon-button *ngIf="someAllowed" [matTooltip]="tooltips[4]" [matTooltipPosition]="tooltipPosition"
+      (click)="dialogService.openActionDialog(dialogService.entityType.Buy, buy, 'delete');" class="button-delete">
+
+      <span class="material-symbols-rounded">
+        delete
+      </span>
+
+    </button>
+
+  </div>
+  <button mat-button mat-dialog-close cdkFocusInitial>
+    Fechar
+  </button>
+
+</mat-dialog-actions>

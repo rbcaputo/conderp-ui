@@ -1,0 +1,101 @@
+<span mat-dialog-title>
+  Detalhes da Notificação
+</span>
+<mat-dialog-content>
+
+  <div class="subtitle-container">
+
+    <span class="material-symbols-rounded">
+      info
+    </span>
+    <span class="subtitle">
+      Informações Gerais
+    </span>
+
+  </div>
+  <div class="content-container">
+
+    <span>
+      Cód. Identificador
+    </span>
+    <span [matTooltip]="tooltips[0]" [matTooltipPosition]="tooltipPosition"
+      (click)="clipboardService.copyTextToClipboard(notification.publicId);" class="public-id">
+      {{notification.publicId}}
+    </span>
+
+  </div>
+  <div class="content-container-mult">
+
+    <div class="content-subcontainer">
+
+      <span>
+        Remetente
+      </span>
+      <span class="value">
+        {{notification.name}}
+      </span>
+
+    </div>
+    <div class="content-subcontainer">
+
+      <span>
+        Data de envio
+      </span>
+      <span class="value">
+        {{notification.sendDate | date: "dd/MM/yyyy"}}
+      </span>
+
+    </div>
+
+  </div>
+  <div class="content-container-mult">
+
+    <div class="content-subcontainer">
+
+      <span>
+        Assunto
+      </span>
+      <span class="value">
+        {{notification.entityType | typeName: ENTITY_TYPE_NAMES}}
+      </span>
+
+    </div>
+    <div class="content-subcontainer">
+
+      <span>
+        Cód. Objeto
+      </span>
+      <span [matTooltip]="tooltips[0]" [matTooltipPosition]="tooltipPosition"
+        (click)="clipboardService.copyTextToClipboard(notification.entityPublicId);" class="public-id">
+        {{notification.entityPublicId}}
+      </span>
+
+    </div>
+
+  </div>
+  <div class="subtitle-container">
+
+    <span class="material-symbols-rounded">
+      description
+    </span>
+    <span class="subtitle">
+      Mensagem
+    </span>
+
+  </div>
+  <div *ngIf="notification.message" class="content-container">
+
+    <span class="value pre-formatted-text">
+      {{notification.message}}
+    </span>
+
+  </div>
+
+</mat-dialog-content>
+<mat-dialog-actions class="notification-dialog-actions">
+
+  <button mat-button mat-dialog-close cdkFocusInitial>
+    Fechar
+  </button>
+
+</mat-dialog-actions>

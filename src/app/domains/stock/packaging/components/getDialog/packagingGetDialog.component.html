@@ -1,0 +1,154 @@
+<span mat-dialog-title>
+  Detalhes da Embalagem
+</span>
+<mat-dialog-content>
+
+  <div class="subtitle-container">
+
+    <span class="material-symbols-rounded">
+      info
+    </span>
+    <span class="subtitle">
+      Informações Gerais
+    </span>
+
+  </div>
+  <div class="content-container-mult">
+
+    <div class="content-subcontainer">
+
+      <span>
+        Cód. Identificador
+      </span>
+      <span [matTooltip]="tooltips[0]" [matTooltipPosition]="tooltipPosition"
+        (click)="clipboardService.copyTextToClipboard(packaging.publicId);" class="public-id">
+        {{packaging.publicId}}
+      </span>
+
+    </div>
+    <div *ngIf="packaging.storageCode" class="content-subcontainer">
+
+      <span>
+        Cód. Estoque
+      </span>
+      <span class="value">
+        {{packaging.storageCode}}
+      </span>
+
+    </div>
+
+  </div>
+  <div class="content-container-mult">
+
+    <div class="content-subcontainer">
+
+      <span>
+        Tipo
+      </span>
+      <span class=" value">
+        {{packaging.packagingType | typeName: PACKAGING_TYPE_NAMES}}
+      </span>
+
+    </div>
+    <div class="content-subcontainer">
+
+      <span>
+        Quantidade (kg/un)
+      </span>
+      <span class="value">
+        {{packaging.amount}}
+      </span>
+
+    </div>
+
+  </div>
+  <div class="subtitle-container">
+
+    <span class="material-symbols-rounded">
+      shelves
+    </span>
+    <span class="subtitle">
+      Fornecimento
+    </span>
+  </div>
+  <div class="content-container-mult">
+
+    <div class="content-subcontainer">
+
+      <span>
+        Data Recebimento
+      </span>
+      <span class="value">
+        {{packaging.receiptDate | date: "dd/MM/yyyy"}}
+      </span>
+
+    </div>
+    <div class="content-subcontainer">
+
+      <span>
+        Cód. Fornecedor
+      </span>
+      <span (click)="dialogService.openGetDialog(dialogService.entityType.Supplier, packaging.supplier)"
+        class="public-id">
+        {{packaging.supplier.publicId}}
+      </span>
+
+    </div>
+
+  </div>
+  <div class="subtitle-container">
+
+    <span class="material-symbols-rounded">
+      description
+    </span>
+    <span class="subtitle">
+      Notas
+    </span>
+    <button mat-icon-button *ngIf="allAllowed" [matTooltip]="tooltips[2]" [matTooltipPosition]="tooltipPosition"
+      (click)="dialogService.openActionDialog(dialogService.entityType.Packaging, packaging, 'notes');"
+      class="button-edit-notes">
+
+      <span class="material-symbols-rounded icon-edit-notes">
+        edit_square
+      </span>
+
+    </button>
+
+  </div>
+  <div *ngIf="packaging.notes && allAllowed" class="content-container">
+
+    <span class="value pre-formatted-text">
+      {{packaging.notes}}
+    </span>
+
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions>
+
+  <div>
+
+    <button mat-icon-button *ngIf="allAllowed" [matTooltip]="tooltips[3]" [matTooltipPosition]="tooltipPosition"
+      (click)="dialogService.openActionDialog(dialogService.entityType.Packaging, packaging, 'put');"
+      class="button-edit">
+
+      <span class="material-symbols-rounded">
+        edit_square
+      </span>
+
+    </button>
+    <button mat-icon-button *ngIf="someAllowed" [matTooltip]="tooltips[4]" [matTooltipPosition]="tooltipPosition"
+      (click)="dialogService.openActionDialog(dialogService.entityType.Packaging, packaging, 'delete');"
+      class="button-delete">
+
+      <span class="material-symbols-rounded">
+        delete
+      </span>
+
+    </button>
+
+  </div>
+  <button mat-button mat-dialog-close cdkFocusInitial>
+    Fechar
+  </button>
+
+</mat-dialog-actions>

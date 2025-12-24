@@ -1,0 +1,96 @@
+span[mat-dialog-title] {
+  text-align: center;
+  padding-bottom: 15px;
+  margin-bottom: 10px;
+  border-bottom: 1px solid rgb(var(--primary-black));
+}
+
+.subtitle-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-left: 10px;
+}
+
+.subtitle {
+  margin: 20px 0;
+  font-weight: 500;
+  color: rgb(var(--primary-black));
+}
+
+.content-container {
+  display: flex;
+  flex-direction: column;
+  margin: 10px 0;
+}
+
+.content-container-mult {
+  display: flex;
+  gap: 50px;
+  margin: 10px 0;
+}
+
+.content-subcontainer {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.public-id,
+a {
+  color: rgb(var(--blue));
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.value {
+  color: rgb(var(--primary-black));
+}
+
+.button-edit-notes {
+  height: 24px !important;
+  width: 24px !important;
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  padding: 0 !important;
+  color: rgb(var(--yellow));
+
+  & .icon-edit-notes {
+    font-size: 16px !important;
+  }
+}
+
+.pre-formatted-text {
+  white-space: pre-wrap;
+  word-break: normal;
+  overflow-wrap: break-word;
+}
+
+mat-dialog-actions {
+  display: flex;
+  justify-content: space-between;
+  border-top: 1px solid rgb(var(--primary-black));
+}
+
+.notification-dialog-actions {
+  display: flex;
+  justify-content: end;
+  border-top: 1px solid rgb(var(--primary-black));
+}
+
+.button-production {
+  color: rgb(var(--green));
+}
+
+.button-delete {
+  color: rgb(var(--red));
+}
+
+.button-edit {
+  color: rgb(var(--yellow));
+}
+
+button[disabled] {
+  color: rgb(var(--grey));
+}

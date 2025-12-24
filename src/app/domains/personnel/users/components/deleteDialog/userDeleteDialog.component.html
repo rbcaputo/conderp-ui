@@ -1,0 +1,25 @@
+<span mat-dialog-title>
+  Remover Usuário
+</span>
+<mat-dialog-content>
+
+  <span>
+
+    Tem certeza que deseja remover permanentemente o Usuário com <br /> Cód. Identificador
+    <span class="public-id">
+      {{user.publicId}}
+    </span>
+    ?
+
+  </span>
+</mat-dialog-content>
+<mat-dialog-actions>
+
+  <button mat-button (click)="deleteUserByPublicIdAsync(user.publicId);">
+    Ok
+  </button>
+  <button mat-button mat-dialog-close cdkFocusInitial>
+    Cancelar
+  </button>
+
+</mat-dialog-actions>

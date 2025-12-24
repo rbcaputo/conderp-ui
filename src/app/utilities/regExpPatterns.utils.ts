@@ -1,0 +1,20 @@
+export const patterns = {
+  publicId: new RegExp("^[\\p{L}]{2}[\\p{L}\\d]{13}$", "u"),
+  storageCode: new RegExp("^[\\p{L}]{2}\\d{4}$", "u"),
+  amountMin: 1,
+  amountMax: 1000,
+  barcode: new RegExp("^\\d{13}$"),
+  companyName: new RegExp("^[\\p{L}\\d][\\p{L}\\d\\s]{1,50}$", "u"),
+  personName: new RegExp("^[\\p{L}][\\p{L}\\s]{1,50}$", "u"),
+  cnpj: new RegExp("^\\d{14}$"),
+  cpf: new RegExp("^\\d{11}$"),
+  phone: new RegExp("^\\d{10,11}$"),
+  whatsApp: new RegExp("^\\d{11}$"),
+  street: new RegExp("^[\\p{L}\\d][\\p{L}\\d\\s.,]{1,50}$", "u"),
+  number: new RegExp("^\\d{1,5}$"),
+  complement: new RegExp("^[\\p{L}\\d][\\p{L}\\d\\s.,]{1,50}$", "u"),
+  district: new RegExp("^[\\p{L}\\d][\\p{L}\\d\\s]{1,50}$", "u"),
+  city: new RegExp("^[\\p{L}\\d][\\p{L}\\d\\s]{1,50}$", "u"),
+  postalCode: new RegExp("^\\d{8}$"),
+  notesMaxLength: 500
+};

@@ -1,0 +1,86 @@
+<div class="title-container">
+
+  <span class="material-symbols-rounded">
+    database
+  </span>
+  <span>
+    CondERP
+
+    <span class="version">
+      v0.6.9a
+    </span>
+
+  </span>
+
+</div>
+<div class="menu-container">
+
+  <div class="button-container">
+
+    <button mat-icon-button [matBadge]="unseenCount$ | async" [matBadgeHidden]="(unseenCount$ | async) === 0"
+      [routerLink]="['/notifications']">
+
+      <span class="material-symbols-rounded">
+        notifications
+      </span>
+
+    </button>
+    <span class="menu-label">
+      Notificações
+    </span>
+
+  </div>
+  <div class="button-container">
+
+    <button mat-icon-button [matMenuTriggerFor]="profile">
+
+      <span class="material-symbols-rounded">
+        person
+      </span>
+
+    </button>
+    <span class="menu-label">
+      Perfil
+    </span>
+
+  </div>
+  <mat-menu #profile="matMenu">
+
+    <ng-container *ngIf="sessionUser$ | async as user">
+
+      <button mat-menu-item (click)="dialogService.openActionDialog(dialogService.entityType.User, user, 'put');">
+
+        <div class="button-subcontainer">
+
+          <span class="material-symbols-rounded">
+            manage_accounts
+          </span>
+          <span class="menu-label">
+            Editar
+          </span>
+
+        </div>
+
+      </button>
+
+    </ng-container>
+
+    <button mat-menu-item (click)="userLogout();">
+
+      <div class="button-subcontainer">
+
+        <span class="material-symbols-rounded">
+          logout
+        </span>
+        <span class="menu-label">
+          Sair
+        </span>
+
+      </div>
+
+    </button>
+
+  </mat-menu>
+
+</div>
+<event-listener></event-listener>
